@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/browz/static/css/main.873cadc8.chunk.css",
-    "main.js": "/browz/static/js/main.d54736fb.chunk.js",
-    "main.js.map": "/browz/static/js/main.d54736fb.chunk.js.map",
+    "main.js": "/browz/static/js/main.d80c422a.chunk.js",
+    "main.js.map": "/browz/static/js/main.d80c422a.chunk.js.map",
     "runtime~main.js": "/browz/static/js/runtime~main.97766991.js",
     "runtime~main.js.map": "/browz/static/js/runtime~main.97766991.js.map",
     "static/js/2.b0541ab9.chunk.js": "/browz/static/js/2.b0541ab9.chunk.js",
     "static/js/2.b0541ab9.chunk.js.map": "/browz/static/js/2.b0541ab9.chunk.js.map",
     "index.html": "/browz/index.html",
-    "precache-manifest.df9328d2d5c3b0234a54d42158eba139.js": "/browz/precache-manifest.df9328d2d5c3b0234a54d42158eba139.js",
+    "precache-manifest.23003c0f1a4a1b1c794290e44df81621.js": "/browz/precache-manifest.23003c0f1a4a1b1c794290e44df81621.js",
     "service-worker.js": "/browz/service-worker.js",
     "static/css/main.873cadc8.chunk.css.map": "/browz/static/css/main.873cadc8.chunk.css.map"
   }
