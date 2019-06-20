@@ -9,7 +9,7 @@ body{	text-align:center;
 .App {
 
 	background-color: #e8ebef;
- 	font-size: calc(8px + 2vmin);
+ 	font-size: 22px;
 	color: black;
 	width: 1100px;
 	display: flex;

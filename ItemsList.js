@@ -38,7 +38,7 @@ class ItemsList extends React.Component {
 		<div className = "DivList">         
 			<ul>
 			  { this.props.list.map(function(item) {
-				return <li className= {this.state.selected === item ? 'selItem': 'liItem' } key={item} name={item} onClick={this.handleClick.bind(this,item)}>{item}</li>}, this)
+				return <li className= {this.state.selected === item ? 'selItem': 'liItem' } key={item} name={item} onClick={this.handleClick.bind(this,item)}>{item.substring(0,14)+(item.length > 15? '...':'')}</li>}, this)
 			  }
 			</ul>
         </div>);

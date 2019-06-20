@@ -20,8 +20,11 @@ uniqueCountries.forEach(function(item, i, arr)
 	uniqueCitiesList.forEach(function(item2, i2, arr2)
 	{
 		let companiesList = Customers.filter((obj) => (obj.Country === item && obj.City === item2))
-			.map((el) => {return el.CompanyName;});
-		companiesList.sort((a, b) => a.localeCompare(b)); //Sort Companies By ABC
+			.map((el) => {return {CompanyName:el.CompanyName, Address: el.Address}});
+			
+		//companiesList.sort((a, b) => a.localeCompare(b)); //Sort Companies By ABC
+		companiesList.sort(CompareCompanyObjectByAbc);
+		
 		CitiesInd.push({
 				 City: item2,
 				 Ind: companiesList.length,
@@ -43,6 +46,14 @@ var cities;
 var uniqueCitiesList, selectedCity;
 var companiesList, selectedCompany;
 var srcMapsURL;
+var cl;
+
+function CompareCompanyObjectByAbc(a,b){
+	if (a.CompanyName > b.CompanyName) return -1;
+	if (b.CompanyName > a.CompanyName) return 1;
+	return 0;
+	
+}
 
 function onlyUnique(value, index, self)
 {
@@ -95,20 +106,26 @@ class App extends React.Component
    
    FilterCompanies(city)
    {
-        console.log(cities[0]);  
-          
-		companiesList = cities[0].filter((item) => item.City === city)[0].companiesList;
-		console.log(companiesList);  
-
-		selectedCompany = companiesList[0];
+		cl = cities[0].filter((item) => item.City === city)[0].companiesList;
+				
+		selectedCompany = cl[0].CompanyName;
+		//selectedAddress = cl[0].Address;
+		
+		companiesList = cl.map((item) => {return item.CompanyName});
 		this.ReloadMap();
    }
    
    ReloadMap()
       {	
-        let searchString = encodeURI(selectedCountry + "," + selectedCity + "," + selectedCompany);
+        let sa = cl.filter((item) => item.CompanyName === selectedCompany)[0].Address;//.map((it) => {return it.Address})[0];
+		
+		
+		let searchString = encodeURI(selectedCountry + "," + selectedCity + "," + sa);
         srcMapsURL = "https://maps.google.com/maps?q=" + searchString + "&t=&z=11&ie=UTF8&iwloc=&output=embed"; //encodeURI();
+		console.log(srcMapsURL);
       }
+	  
+	  
       /* onlyUnique(value, index, self) {
 
       return self.indexOf(value) === index;
@@ -138,6 +155,7 @@ class App extends React.Component
    {
       selectedCompany = item;
       this.setState({selectedCompany: item});
+	  
       this.ReloadMap();
       this.setState({srcMapsURL: srcMapsURL});
    }
