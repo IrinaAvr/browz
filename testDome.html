@@ -1,0 +1,640 @@
+<!-- Loop 
+Function appendChildren should add a new child div to each existing div. New divs should be decorated by calling decorateDiv. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>appendChildren</title>
+</head>
+<body>
+   	<div id="a">
+	  <div id="b">
+	  </div>
+	</div>
+    <script >
+	
+	appendChildren();
+	
+	function appendChildren() {
+		var allDivs = document.getElementsByTagName("div");
+		var numbersOfDiv = allDivs.length;
+
+		for (var i = 0; i < allDivs.length; i++) {
+			var newDiv = document.createElement("div");
+			//decorateDivFunction(newDiv);
+			allDivs[i].appendChild(newDiv);
+		}
+	}	
+	console.log(document.body.innerHTML);	
+	
+	</script>
+</body>
+</html>
+
+<!-- Closures
+  Back to questions
+Fix the bugs in the registerHandlers function. An alert should display anchor's zero-based index within a document instead of following the link.
+
+For example, in the document below, the alert should display "2" when Google anchor is clicked since it is the third anchor element in the document and its zero-based index is 2.
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>registerHandlers</title>
+</head>
+<body>
+
+  In my life, I used the following web search engines:<br/>
+  <a href="//www.yahoo.com">Yahoo!</a><br/>
+  <a href="//www.altavista.com">AltaVista</a><br/>
+  <a href="//www.google.com">Google</a><br/>
+
+	<script >
+
+		registerHandlers();
+
+		function registerHandlers() {
+			var as = document.getElementsByTagName('a');
+			for (var i = 0; i < as.length; i++) {
+				let ii = i;
+				as[i].onclick = function() {
+					alert(ii);
+					return false;
+				}
+
+			}
+		}
+		console.log(document.body.innerHTML);	
+
+	</script>
+</body>
+</html>
+
+
+<!-- 
+Your company assigns each customer a membership ID, and you are implementing a check digit for those IDs.
+The check digit should be calculated by adding up all digits in each membership ID. If the result of the sum is a number with more than a single digit, another iteration is required, and the digits of the result also should be added together. This process should repeat until a single-digit number is calculated.
+For example, for the membership ID "55555" the sum of all digits is 25. Because this is not a single-digit number, 2 and 5 would be added, and the result, 7, would be the check digit.
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Check Digit</title>
+	
+</head>
+<body>
+
+	<script >
+	
+	function createCheckDigit(membershipId) {
+		if (membershipId.length > 1) {
+			let str = membershipId.split('');
+			
+			let digit = 0;
+			for(let val of str){
+				digit = digit*1 + val*1;
+				}
+			
+			if (digit*1 > 9)
+				return createCheckDigit("" + digit);
+			else
+				return digit*1;
+		} 
+		else{
+		return membershipId*1;
+		}
+	}
+	
+	var result = createCheckDigit("55555");
+	console.log(result);
+
+	</script>
+</body>
+</html>
+
+
+<!-- 
+An image gallery is a set of images with corresponding remove buttons. This is the HTML code for a gallery with two images:
+	<div class="image">
+		<img src="https://goo.gl/kjzfbE" alt="First">
+		<button class="remove">X</button>
+	</div>
+	<div class="image">
+		<img src="https://goo.gl/d2JncW" alt="Second">
+		<button class="remove">X</button>
+	</div>
+Implement the setup function that registers a click event handler and implements the following logic:
+When the button of class remove is clicked, its parent <div> element should be removed from the gallery.
+For example, after the first image has been removed from the gallery above, it's HTML code should look like this:
+<div class="image">
+  <img src="https://goo.gl/d2JncW" alt="Second">
+  <button class="remove">X</button>
+</div>
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>DeleteElement</title>
+	
+</head>
+<body>
+	<div class="image">
+		<img src="https://goo.gl/kjzfbE" alt="First">
+		<button class="remove">X</button>
+	</div>
+	<div class="image">
+		<img src="https://goo.gl/d2JncW" alt="Second">
+		<button class="remove">X</button>
+	</div>
+	<script >
+
+	function setup(){
+		document.querySelectorAll(".remove").forEach(function(button, index){
+			button.addEventListener('click', function(){
+				this.closest("div").remove();// parent div
+
+			})
+		});
+	}
+
+	setup();
+
+	//document.getElementsByClassName("remove")[0].click();
+	console.log(document.body.innerHTML);
+	
+	</script>
+</body>
+</html>
+
+
+<!-- 
+Write a function that converts user entered date formatted as M/D/YYYY to a format required by an API (YYYYMMDD). 
+The parameter "userDate" and the return value are strings.
+For example, it should convert user entered date "12/31/2014" to "20141231" suitable for the API.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Ensure</title>
+	
+</head>
+<body>
+	<script >
+
+	function formatDate(userDate) {
+		// format from M/D/YYYY to YYYYMMDD
+		
+		let arrd = userDate.split('/');
+		let mmm = ('0' + arrd[0]);
+		let ddd = ('0' + arrd[1]);
+
+		mmm = mmm.substr(mmm.length-2);
+		ddd = ddd.substr(ddd.length-2);
+
+		return "" + arrd[2]+ mmm + ddd;
+	}
+
+	console.log(formatDate("12/31/2014"));
+
+	</script>
+</body>
+</html>
+
+
+<!-- 
+Implement the ensure function so that it throws an error if called without arguments or the argument is undefined. 
+Otherwise it should return the given value. 
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Ensure</title>
+	
+</head>
+<body>
+	<script >
+		function ensure(value) {
+			if (arguments.length == 0 || value===undefined)
+				throw "Too undefined";
+			return value;
+		}
+	</script>
+</body>
+</html>
+
+
+<!-- Closures
+Implement the removeProperty function which takes an object and property name, and does the following:
+
+If the object obj has a property prop, the function removes the property from the object and returns true; in all other cases it returns false.
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Remove Properties</title>
+	
+</head>
+<body>
+
+	<script >
+	
+	var myObject = {
+		"ircEvent": "PRIVMSG",
+		"method": "newURI",
+		"regex": "^http://.*"
+	};
+	
+	removeProperty(myObject, "regex");
+	
+	console.log(myObject);
+	
+	function removeProperty(obj, prop) {
+
+		if (obj[prop]!=undefined){
+			delete obj[prop];
+			return true;
+		}
+
+		return false;
+	}
+
+	</script>
+</body>
+</html>
+
+Advanced form
+
+With the new HTML5 features, modify the form so that:
+The formula input field has an autocomplete option with the following options: "sin", "cos", "tan" and "cot".
+The iterations input field is a slider with possible values from 1 to 10.
+The precision input field is a number picker with possible values from 1 to 100, where 50 is the default value.
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Advanced form</title>
+</head>
+<body>
+  <form autocomplete="on">
+    Formula: <input name="formula" list="formula">
+    <datalist id="formula">
+      <option value="sin">
+      <option value="cos">
+      <option value="tan">
+      <option value="cot">
+
+    </datalist><br />
+    Iterations: <input type="range" id="iterations" name="iterations" 
+                       min="1" max="10" step="1" value="5" >
+        <label for="iterations">Iterations</label>   
+    <br />
+    Precision: <input name="precision" type="number" 
+                      min="1" max="100" step="1" value="50"><br />
+  </form>
+</body>
+</html>
+
+
+<!-- You've been sent a snippet from a spreadsheet, and have been asked to re-create it for display on the company's internal website.
+Re-create the following spreadsheet using HTML, in a table appropriately captioned "Purchase Orders". -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Spreadsheet</title>
+    <style>
+      td {
+        text-align: right;
+        width: 33%;
+      }
+      td, th, table {
+        border: 1px solid;
+        border-collapse: collapse;
+      }
+      th {
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <table>  
+      <caption>Purchase Orders</caption>
+      <thead>
+        <tr>
+          <th>Order Date</th>
+          <th>SKU</th>
+          <th>QUanttity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>07-16-2018</td>
+          <td>523402</td>
+          <td>54</td>
+        </tr>
+        
+        
+      </tbody>
+    </table>
+  </body>
+</html>
+
+
+<!--Write CSS so that link <a href="http://www.testdome.com">Check documentation</a> and cursor looks like a question mark:
+-->
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Styling links</title>
+    <style type="text/css">
+
+    a{
+		cursor: help;
+		text-decoration: none;
+		text-transform: uppercase ;
+	}
+	
+	a:before { 
+		content: "> "; 
+	}
+	a:after { 
+		content: "< "; 
+	}
+	
+
+    </style>
+  </head>
+  <body>
+    <a href="http://www.testdome.com"> Check documentation </a>
+  </body>
+</html>
+
+
+<!--Avatar  
+Every user on your website has an image avatar that is displayed when they post a comment. You want to style these images differently from other images on your site. Add a CSS class named avatar that fulfils the following requirements:
+
+The avatar's border is rounded, so that it appears as a circle.
+The avatar's width and height are both 150px.
+The avatar has a solid border, has a width of 2px, and be colored gray.
+For example, the avatar in the template should look like: -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Avatar</title>
+    <style>
+      /* Write your CSS solution here (do not edit the surrounding HTML) */
+      .avatar{
+        
+        width:150px;
+        height:150px;
+        border-radius: 50%;
+        border: 2px solid grey;
+        
+      }
+    </style>
+  </head>
+  <body>
+    <img class="avatar" src="https://goo.gl/khGCrk" alt="avatar" />
+  </body>
+</html>
+
+<!--Inspector 
+ Fix the bugs in the following HTML code. -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Company page</title>
+  </head>
+  <body>
+    <p>Welcome! Here you can find the following things:</p>
+    <ol>
+      <em><li><a href="#logo">Company's logo</a></li>
+      <li><a href="#employees">List of employees</a></li></em>
+    </ol>
+
+    <h1 id="logo">Company's logo</h1>
+    <p>Company uses the following logos:</p>
+    <ul>
+      <li>New logo:<img src="new_logo.gif"/></li>
+      <li>Old logo:<img src="old_logo.gif"/></li>
+    </ul>
+
+    <h1 id="employees">List of employees</h1>
+    
+    <table>
+	<thead>
+      <th>First name</th>
+      <th>Last name</th>
+    </thead>
+      <tr>
+        <td>Mary</td>
+        <td>Williams</td>
+      </tr>
+      <tr>
+        <td>James</td>
+        <td>Smith</td>
+      </tr>
+    </table>
+  </body>
+</html>
+
+<!-- Articles
+  Back to questions
+Using CSS only (without adding additional HTML attributes), style articles so that they occupy the whole browser window and have the following properties: -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Articles</title>
+  <style>
+  html,body {
+    padding:0;
+    margin:0;
+    height:100%;
+}
+article {
+  min-height: 50%;
+  width: 50%;
+  float: left;
+}
+article:nth-child(1) {
+    background: Red;
+   }
+article:nth-child(2) {
+    background: Yellow;
+   }
+article:nth-child(3) {
+    background: Blue;
+   }
+article:nth-child(4) {
+    background: Green;
+   }
+
+    /* Write your CSS solution here (do not edit the surrounding HTML) */
+  </style>
+</head>
+<body>
+  <article>First</article>
+  <article>Second</article>
+  <article>Third</article>
+  <article>Fourth</article>
+</body>
+</html>
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SortedSearch
+{
+    class Program
+    {
+
+        public static int CountNumbers(int[] sortedArray, int lessThan)
+        {
+            int start = 0;
+            int end = sortedArray.Length - 1;
+            int mid = 0;
+
+            while (start <= end)
+            {
+                mid = (start + end) / 2;
+                if (sortedArray[mid] < lessThan)
+                {
+                    if (mid < sortedArray.Length - 1 && sortedArray[mid + 1] < lessThan)
+                    { // check id next value is also valid
+                        start = mid + 1;
+                        continue;
+                    }
+                    else
+                        return mid + 1;
+                }
+
+                if (sortedArray[mid] >= lessThan)
+                {
+                    end = mid - 1;
+                }
+                else
+                {
+                    start = mid + 1;
+                }
+            }
+            return 0;
+
+        }
+
+
+
+
+        static void Main(string[] args)
+        {
+
+            Console.WriteLine(CountNumbers(new int[] { 1, 3, 5, 7 }, 4));
+            Console.ReadLine();
+        }
+    }
+}
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+class TwoSum
+{
+    public static Tuple<int, int> FindTwoSum(IList<int> list, int sum)
+    {
+        //throw new NotImplementedException("Waiting to be implemented.");
+
+        IList<int> repeatVal = list;
+        //tup.create(1, 1);
+
+        for (var i = 0; i < list.Count - 1; i++)
+        {
+            //if (repeatVal[i] == -1)
+            //{
+            //    continue;
+            //}                
+
+            for (var j = i+1; j < list.Count; j++)
+            {
+                //if (repeatVal[j] == -1)
+                //{
+                //    continue;
+                //}
+                //if (i != j)
+                //{
+                    if (list[i] + list[j] == sum)
+                    {
+                        return new Tuple<int, int>(i, j);
+                    }
+                    else if (list[i] == list[j])
+                    {
+                        repeatVal[j] = -1;
+                    }
+                //}
+            }
+        }
+        return null;
+    }
+
+    public static Tuple<int, int> FindTwoSum2(IList<int> list, int sum)
+    {
+        var numsDictionary = new Dictionary<int, int>();
+
+        var complement = 0;
+        for (var i = 0; i < list.Count; i++)
+        {
+            complement = sum - list[i];
+            var index = 0;
+            if (complement > 0 && numsDictionary.TryGetValue(complement, out index))
+            {
+                return new System.Tuple<int, int>(index, i);
+            }
+
+            if (numsDictionary.ContainsKey(list[i]) == false)
+            {
+                numsDictionary.Add(list[i], i);
+            }
+        }
+
+        return null;
+    }
+
+    public static void Main(string[] args)
+    {
+        Tuple<int, int> indices = FindTwoSum(new List<int>() { 3, 1, 5, 7, 5, 9 }, 10);
+        if (indices != null)
+        {
+            Console.WriteLine(indices.Item1 + " " + indices.Item2);
+
+        }
+        Console.ReadLine();
+
+    }
+}
+
+
